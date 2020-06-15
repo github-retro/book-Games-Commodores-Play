@@ -62,13 +62,16 @@
 3060 GOSUB 3130: IF SL=0 THEN RETURN
 3070 GOSUB 3270: REM SHIP
 3080 GOTO 3050
-3090 :
-3100 REM LINE 3110 CHECKS TO SEE IF THE PLANE IS AT -1. IF SO, THE PLAINE IS OFF SCREEN. AND REVERTS TO 33, THE RIGHT HAND
-3101 REM SIDE OF THE PICTURE. FROM THERE THE CYCLE BEGINS AGAIN
+3090 REM SUBROUTINE - MOVE PLANE
+3100 REM LINE 3110 CHECKS TO SEE IF THE PLANE IS AT -1.
+3101 REM IF SO, THE PLAINE IS OFF SCREEN. AND 
+3102 REM REVERTS TO 33 THE RIGHT HAND SIDE OF THE PICTURE.
+3103 REM FROM THERE THE CYCLE BEGINS AGAIN
 3110 AX=AX-1: IF AX<0 THEN AX=33: SYS PLT,0,0: PRINT "{light blue}       {down}{left}{left}{left}{left}{left}{left}{left}      ";
 3115 SYS PLT,AX,0
-3120 PRINT "{reverse off}{light blue}   {white}... {black}{reverse on}{sh pound}{reverse off} {down}{left}{left}{left}{left}{left}{left}{left}{reverse on}{cm asterisk} - -{reverse off} ";
+3120 PRINT "{reverse off}{light blue}    {white}{cm @}{cm @}{cm @}{black}{reverse on}{sh pound}{reverse off} {down}{left}{left}{left}{left}{left}{left}{left}{reverse on}{sh pound} -  -{reverse off} ";
 3125 RETURN
+3129 REM SUBROUTINE - DROP BOMB
 3130 IF FF<>0 THEN GOTO 3160
 3140 GET X$: IF X$="" THEN RETURN
 3150 FF=1: FX=AX+3: FY=2: BC=1
@@ -77,9 +80,9 @@
 3166 BC=0
 3170 FY=FY+1
 3175 CO=FN CO(O)
-3180 IF CO<>15 AND CO<>6 THEN SYS PLT,FX,FY: PRINT "{yellow}-";: RETURN
+3180 IF CO<>15 AND CO<>6 THEN SYS PLT,FX,FY: PRINT "{yellow}{cm o}";: RETURN
 3190 IF CO=6 THEN GOTO 3230
-3200 TS=TS+INT(22-FY+.5)*10:IF FX=SX+4 THEN TS=TS+10
+3200 TS=TS+INT(22-FY+.5)*10: IF FX=SX+4 THEN TS=TS+10
 3210 SC=0: SYS PLT,SX,20: PRINT "{reverse off}{light blue}       {down}{left}{left}{left}{left}{left}{left}{left}      ";
 3220 SX=33: SS=1: SC=0
 3230 SYS PLT,FX-2,20: PRINT"{white}- {reverse on} {reverse off} -{down}{left}{left}{left}{left}{left}{left}{left}- -";
@@ -87,10 +90,11 @@
 3240 SYS PLT,FX-2,20: PRINT "{reverse off}{light blue}       {down}{left}{left}{left}{left}      ";
 3250 FF=0: SL=SL-1
 3260 SYS PLT,0,24: PRINT"{white}{reverse off}SHOTS LEFT:"SL"{left} "TAB(18)"SCORE:"TS"{left} ";: RETURN
+3269 REM SUBROUTINE - MOVE SHIP
 3270 SC=SC+1: IF SC<SS THEN RETURN
 3280 SC=0: SYS PLT,SX,20: PRINT"{reverse off}{light blue}       {down}{left}{left}{left}{left}{left}{left}{left}      ";
 3290 SX=SX+1: IF SX>33 THEN SX=0: SS=1+INT(3*RND(0))
-3300 SYS PLT,SX,20: PRINT "{light gray}     {cm a}{reverse on} {reverse off}{cm s}{down}{left}{left}{left}{left}{left}{left}{sh pound}{reverse on}      {reverse off}{sh asterisk}";: RETURN
+3300 SYS PLT,SX,20: PRINT "{light gray}     {cm a}{reverse on} {reverse off}{cm s}{down}{left}{left}{left}{left}{left}{left}{cm asterisk}{reverse on}     {reverse off}{sh pound}";: RETURN
 3990 RETURN
 4000 :
 4001 REM ** END
