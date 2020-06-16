@@ -74,14 +74,14 @@
 3070 IF KEY$="Q" THEN RETURN
 3080 IF KEY$="Z" THEN GOTO 3003
 3090 GOTO 3010
-3100 SYS PDL,0,23
+3100 SYS PLT,0,23
 3101 PRINT "{reverse off}                                        "
 3102 PRINT "{reverse off}                                        ";
 3103 FI$=""
 3105 SYS PLT,0,23: INPUT"{white} SAVE AS WHAT FILE";FI$: IF FI$="" THEN GOTO 3005
 3110 OPEN 2,8,2,"@:"+FI$+",S,W"
 3115 FOR I=0 TO 839: PRINT#2,CHR$(PEEK(55296+I)AND 15);: NEXT I
-3120 CLOSE 2: GOTO 3005
+3120 CLOSE 2: GOTO 3005r
 3200 SYS PLT,0,23
 3201 PRINT "{reverse off}                                        "
 3202 PRINT "{reverse off}                                        ";
@@ -89,10 +89,9 @@
 3210 OPEN 2,8,2,FI$+",S,R"
 3215 FOR I=0 TO 839: GET#2,A$: POKE 55296+I,ASC(A$+CHR$(0)): NEXT I
 3220 CLOSE 2: GOTO 3005
-3230 PRINT "{white}PROGRAM-PLAY"
 3990 RETURN
 4000 :
 4001 REM END
 4002 :
-4010 PRINT "{clear}{white}PROGRAM-END"
+4010 PRINT "{clear}{white}"
 4990 RETURN
