@@ -52,7 +52,7 @@
 2060 SYS PLT,0,22: PRINT "{reverse on}{blue}                                        ";
 2065 SYS PLT,0,23: PRINT "{reverse on}{blue}                                        ";
 2090 AX=0: SX=33: SS=1
-2100 DEF FN CO(X)=PEEK(55296+FX+40+FY) AND 15
+2100 DEF FN CO(X)=PEEK(55296+FX+40*FY) AND 15
 2990 RETURN
 3000 :
 3001 REM *** PLAY
@@ -83,7 +83,7 @@
 3180 IF CO<>15 AND CO<>6 THEN SYS PLT,FX,FY: PRINT "{yellow}{cm o}";: RETURN
 3190 IF CO=6 THEN GOTO 3230
 3200 TS=TS+INT(22-FY+.5)*10: IF FX=SX+4 THEN TS=TS+10
-3210 SC=0: SYS PLT,SX,20: PRINT "{reverse off}{light blue}       {down}{left}{left}{left}{left}{left}{left}{left}      ";
+3210 SC=0: SYS PLT,SX,20: PRINT "{reverse off}{light blue}       {down}{left}{left}{left}{left}{left}{left}{left}       ";
 3220 SX=33: SS=1: SC=0
 3230 SYS PLT,FX-2,20: PRINT"{white}- {reverse on} {reverse off} -{down}{left}{left}{left}{left}{left}{left}{left}- -";
 3235 FOR PA=1 TO 50: NEXT PA
@@ -92,9 +92,9 @@
 3260 SYS PLT,0,24: PRINT"{white}{reverse off}SHOTS LEFT:"SL"{left} "TAB(18)"SCORE:"TS"{left} ";: RETURN
 3269 REM SUBROUTINE - MOVE SHIP
 3270 SC=SC+1: IF SC<SS THEN RETURN
-3280 SC=0: SYS PLT,SX,20: PRINT"{reverse off}{light blue}       {down}{left}{left}{left}{left}{left}{left}{left}      ";
+3280 SC=0: SYS PLT,SX,20: PRINT"{reverse off}{light blue}       {down}{left}{left}{left}{left}{left}{left}{left}       ";
 3290 SX=SX+1: IF SX>33 THEN SX=0: SS=1+INT(3*RND(0))
-3300 SYS PLT,SX,20: PRINT "{light gray}     {cm a}{reverse on} {reverse off}{cm s}{down}{left}{left}{left}{left}{left}{left}{cm asterisk}{reverse on}     {reverse off}{sh pound}";: RETURN
+3300 SYS PLT,SX,20: PRINT "{light gray}   {cm a}{reverse on} {reverse off}{cm s}{down}{left}{left}{left}{left}{left}{left}{cm asterisk}{reverse on}     {reverse off}{sh pound}";: RETURN
 3990 RETURN
 4000 :
 4001 REM ** END
